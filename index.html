@@ -1,77 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parabyte</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parabyte | Premium Developer Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        /* --- Base Setup --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #03050a; color: #ffffff; line-height: 1.6; overflow-x: hidden; }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        /* --- Animations --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(1.1); }
+            100% { opacity: 0.1; transform: scale(1); }
+        }
 
-<style>
-body {
-  background: black;
-  color: white;
-  font-family: Arial;
-}
+        /* --- Background Glow Effects --- */
+        .bg-glow {
+            position: fixed; width: 400px; height: 400px; filter: blur(180px);
+            border-radius: 50%; z-index: -1; animation: pulseGlow 8s infinite alternate ease-in-out;
+        }
+        .glow-1 { top: -150px; left: -150px; background: #00f3ff; }
+        .glow-2 { bottom: -150px; right: -150px; background: #3b00ff; animation-delay: 2s; }
 
-h1 {
-  text-align: center;
-  margin-top: 80px;
-  color: #00f0ff;
-}
+        /* --- Navigation --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 5%; background: rgba(3, 5, 10, 0.7);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .logo {
+            font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700;
+            color: #ffffff; text-decoration: none; letter-spacing: 1px;
+        }
+        .logo span { color: #00f3ff; }
+        
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            color: #a0aabf; text-decoration: none; font-size: 0.95rem; font-weight: 500;
+            transition: color 0.3s ease; position: relative;
+        }
+        .nav-links a:hover { color: #ffffff; }
+        .nav-links a::after {
+            content: ''; position: absolute; left: 0; bottom: -5px; width: 0%; height: 2px;
+            background: #00f3ff; transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
 
-.card {
-  background: #111;
-  border-radius: 15px;
-  transition: 0.3s;
-}
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center; padding: 120px 20px 80px; max-width: 800px; margin: 0 auto;
+            animation: fadeUp 1s ease-out forwards;
+        }
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 4rem; margin-bottom: 20px;
+            background: linear-gradient(to right, #ffffff, #8a95ab, #00f3ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            line-height: 1.1; letter-spacing: -1px;
+        }
+        .hero p { font-size: 1.15rem; color: #8a95ab; margin-bottom: 40px; font-weight: 300; }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #00f0ff;
-}
+        /* Premium Button */
+        .btn-primary {
+            display: inline-block; padding: 14px 35px; font-size: 1rem; font-weight: 500;
+            color: #ffffff; text-decoration: none; border-radius: 30px;
+            background: linear-gradient(90deg, rgba(0, 243, 255, 0.1), rgba(0, 102, 255, 0.1));
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+            transition: all 0.4s ease; cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, rgba(0, 243, 255, 0.2), rgba(0, 102, 255, 0.2));
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+            transform: translateY(-3px); border-color: #00f3ff;
+        }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-</style>
+        /* --- Glassmorphism Cards Container --- */
+        .cards-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px; padding: 0 5%; margin-bottom: 100px;
+            opacity: 0; animation: fadeUp 1s ease-out 0.4s forwards;
+        }
 
+        /* --- Individual Card Styling --- */
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px;
+            padding: 40px 30px; text-align: left;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer; text-decoration: none; color: white; display: block;
+            position: relative; overflow: hidden;
+        }
+        
+        /* Subtle gradient line on top of card */
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.5), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-12px); border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 243, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .card:hover::before { opacity: 1; }
+
+        .card i { font-size: 2.5rem; color: #00f3ff; margin-bottom: 20px; display: inline-block; transition: transform 0.3s ease; }
+        .card:hover i { transform: scale(1.1); }
+
+        .card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 15px; transition: color 0.3s ease; }
+        .card p { color: #8a95ab; font-size: 0.95rem; font-weight: 300; }
+
+        .special-badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            background: rgba(0, 243, 255, 0.05); color: #00f3ff;
+            padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 500;
+            margin-top: 25px; border: 1px solid rgba(0, 243, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .nav-links { display: none; } /* Hide links on mobile for cleaner look */
+            .cards-container { padding: 0 20px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>🚀 Parabyte</h1>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
 
-<div class="container mt-5">
-  <div class="row text-center">
-
-    <div class="col-4">
-      <a href="python.html">
-        <div class="card p-3">
-          <h5>Python</h5>
+    <nav>
+        <a href="#" class="logo">Para<span>byte</span></a>
+        <div class="nav-links">
+            <a href="python.html">Python</a>
+            <a href="cpp.html">C++</a>
+            <a href="projects.html">Projects</a>
         </div>
-      </a>
-    </div>
+    </nav>
 
-    <div class="col-4">
-      <a href="cpp.html">
-        <div class="card p-3">
-          <h5>C++</h5>
-        </div>
-      </a>
-    </div>
+    <header class="hero">
+        <h1>Building the Future,<br>One Line at a Time.</h1>
+        <p>A premium developer portfolio featuring ready-to-use code snippets, beginner-friendly tutorials, and unique real-world hardware integrations.</p>
+        <a href="#explore" class="btn-primary">Explore My Work</a>
+    </header>
 
-    <div class="col-4">
-      <a href="projects.html">
-        <div class="card p-3">
-          <h5>Projects</h5>
-        </div>
-      </a>
-    </div>
+    <section class="cards-container" id="explore">
+        
+        <a href="python.html" class="card">
+            <i class='bx bxl-python'></i>
+            <h2>Python</h2>
+            <p>Clean, ready-to-use code snippets and practical examples to master automation and scripting.</p>
+        </a>
 
-  </div>
-</div>
+        <a href="cpp.html" class="card">
+            <i class='bx bxl-c-plus-plus'></i>
+            <h2>C++</h2>
+            <p>Core logic-based programs and Data Structures & Algorithms (DSA) built for performance.</p>
+        </a>
+
+        <a href="projects.html" class="card">
+            <i class='bx bx-microchip'></i>
+            <h2>Projects</h2>
+            <p>Real-world applications and hardware integrations that bridge software with the physical world.</p>
+            <div class="special-badge"><i class='bx bxs-hot'></i> Arduino + Python</div>
+        </a>
+
+    </section>
 
 </body>
 </html>
