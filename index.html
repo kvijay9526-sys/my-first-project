@@ -1,248 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parabyte | Rohit's Elite Portfolio</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
-    <style>
-        /* =========================================
-           1. CORE VARIABLES & BASE SETUP
-           ========================================= */
-        :root {
-            --bg-deep: #02040d;
-            --bg-mid: #0a0e21;
-            --bg-light: #2c005e;
-            --text-main: #f0f0f0;
-            --text-muted: #a0a8bf;
-            --primary-gold: #D4AF37; /* Metallic Gold */
-            --accent-sapphire: #0f4c92;
-            --accent-amethyst: #6f42c1;
-            --gold-gradient: linear-gradient(135deg, #fcf6ba 0%, #bf953f 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
-            --transition-smooth: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        
-        body {
-            /* Complex blending to create velvet-galaxy background effect */
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(111, 66, 193, 0.25) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(15, 76, 146, 0.25) 0%, transparent 40%),
-                radial-gradient(circle at center, var(--bg-mid) 0%, var(--bg-deep) 100%);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex; flex-direction: column; align-items: center;
-        }
+<title>Python Calculator | Parabyte</title>
 
-        /* Subtle wall texture grid */
-        body::before {
-            content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            mask-image: linear-gradient(to bottom, transparent, black, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, black, transparent);
-        }
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        /* Animations */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulseGlow { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+<style>
+  body {
+    background-color: #0b1f1f;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
 
-        /* =========================================
-           2. PREMIUM NAVIGATION
-           ========================================= */
-        nav {
-            width: 90%; max-width: 1300px;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 40px; margin-top: 25px;
-            background: rgba(20, 5, 40, 0.4);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
+  .hero {
+    text-align: center;
+    padding: 40px 20px;
+  }
 
-        .logo-block { display: flex; align-items: center; gap: 10px; }
-        .logo-block i { font-size: 32px; color: var(--primary-gold); text-shadow: 0 0 15px var(--primary-gold); }
-        .logo-text { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #fff; text-decoration: none; }
-        .logo-text span { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .code-box {
+    background: #000;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: monospace;
+    overflow-x: auto;
+    box-shadow: 0 0 15px rgba(0,255,255,0.2);
+  }
 
-        .nav-links { display: flex; gap: 35px; }
-        .nav-links a {
-            color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition-smooth);
-        }
-        .nav-links a:hover { color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.8); }
+  .btn-custom {
+    background: cyan;
+    color: black;
+    border: none;
+  }
 
-        /* =========================================
-           3. THE GOLDEN HEADER (HINGLISH TEXT)
-           ========================================= */
-        header { 
-            text-align: center; margin: 80px 20px 100px;
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .gold-title {
-            font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800; letter-spacing: 1px; line-height: 1.2;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text; color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
-            margin-bottom: 20px;
-        }
+  .btn-custom:hover {
+    background: #00cccc;
+  }
 
-        header p { color: var(--text-muted); font-size: 1.15rem; font-weight: 300; letter-spacing: 1px; max-width: 800px; margin: 0 auto; line-height: 1.7;}
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #061414;
+    margin-top: 40px;
+  }
+</style>
 
-        /* =========================================
-           4. 3D EXHIBIT TILES (HYPER-REALISTIC)
-           ========================================= */
-        .exhibit-hall {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px; width: 90%; max-width: 1300px;
-            padding-bottom: 120px; margin-top: 50px;
-        }
-
-        .exhibit-tile {
-            background: rgba(10, 15, 28, 0.4);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px; padding: 50px 30px 40px;
-            text-align: left; position: relative;
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-            transition: var(--transition-smooth);
-            display: flex; flex-direction: column; align-items: flex-start;
-            animation: fadeInUp 1s ease-out forwards; opacity: 0;
-            overflow: visible; /* Taki icon hawa mein bahar nikal sake */
-        }
-        
-        .exhibit-tile:nth-child(1) { animation-delay: 0.3s; }
-        .exhibit-tile:nth-child(2) { animation-delay: 0.5s; }
-        .exhibit-tile:nth-child(3) { animation-delay: 0.7s; }
-
-        /* Complex hover effects: tilt, shadow, glow */
-        .exhibit-tile:hover {
-            transform: translateY(-15px) rotateX(3deg) rotateY(-3deg);
-            border-color: rgba(212, 175, 55, 0.3);
-            box-shadow: 0 40px 70px rgba(0,0,0,0.8), inset 0 0 15px rgba(212, 175, 55, 0.05);
-        }
-
-        /* 3D FLOATING OBJECTS (MAGIC IN CSS MOCKUP) */
-        .tile-icon-floating {
-            position: absolute; top: -60px; right: -30px;
-            width: 180px; height: 180px; display: flex; justify-content: center; align-items: center;
-            pointer-events: none; z-index: 10;
-        }
-
-        .tile-icon-floating img {
-            max-width: 100%; max-height: 100%;
-            animation: float3D 5s ease-in-out infinite;
-            filter: drop-shadow(0 25px 20px rgba(0,0,0,0.8));
-        }
-
-        @keyframes float3D { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-        /* Center icon specific animation for depth */
-        .exhibit-tile:nth-child(2) .tile-icon-floating img { width: 220px; height: 220px; top: -20px; right: -50px;}
-
-        /* Tile Content (Hinglish descriptions) */
-        .exhibit-tile h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #fff; margin-bottom: 12px; }
-        .exhibit-tile p { color: var(--text-muted); font-size: 1rem; margin-bottom: 30px; line-height: 1.6; font-weight: 300;}
-
-        /* Royal Gold Pill Button */
-        .gold-pill-btn {
-            background: linear-gradient(180deg, #fcf6ba 0%, var(--primary-gold) 100%);
-            border: none; border-radius: 30px;
-            color: #1a0a2e; font-size: 0.95rem; font-weight: 700;
-            padding: 14px 35px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
-            display: inline-block; transition: var(--transition-smooth);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            margin-top: auto;
-        }
-
-        .gold-pill-btn:hover {
-            background: linear-gradient(180deg, #ffffff 0%, #fcf6ba 100%);
-            transform: translateY(-5px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Center piece unique glowing border effect */
-        .exhibit-tile:nth-child(2)::before {
-            content: ''; position: absolute; inset: 0; border-radius: 20px;
-            border: 2px solid rgba(15, 76, 146, 0.2);
-            box-shadow: inset 0 0 25px rgba(15, 76, 146, 0.1);
-            animation: pulseGlow 3s ease-in-out infinite alternate;
-        }
-
-        /* Responsive Mobile Layout */
-        @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 20px; padding: 15px; }
-            .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
-            header { margin-top: 50px; }
-            
-            .exhibit-hall { gap: 100px; padding-top: 50px; }
-            .tile-icon-floating { top: -70px; right: 50%; transform: translateX(50%); width: 140px; height: 140px; }
-            .exhibit-tile:nth-child(2) .tile-icon-floating img { width: 140px; height: 140px; top: 0; right: 0;}
-            
-            .exhibit-tile h3 { margin-top: 60px; text-align: center; }
-            .exhibit-tile p { text-align: center; }
-            .gold-pill-btn { align-self: center; }
-        }
-    </style>
 </head>
+
 <body>
 
-    <nav>
-        <div class="logo-block">
-            <i class='bx bx-cube-alt'></i>
-            <a href="#" class="logo-text">Para<span>byte</span></a>
-        </div>
-        <div class="nav-links">
-            <a href="#python">Seekhlo Python</a>
-            <a href="#cpp">C++ Logic</a>
-            <a href="#projects">Kuch Banaao</a>
-        </div>
-    </nav>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
 
-    <header>
-        <h1 class="gold-title">Premium Coding, Hyper-Realistic Logic.</h1>
-        <p>Abe main bhi developer hun! Design se lekar optimized code tak, Rohit ke elite examples seekho aur perform karo.</p>
-    </header>
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="Picsart_26-03-25_19-54-56-374.png" width="40" class="me-2">
+      Parabyte
+    </a>
 
-    <main class="exhibit-hall">
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>Basic Python Calculator</h1>
+  <p>Simple calculator using Python functions</p>
+
+  <a href="pythonmenu.html" class="btn btn-custom mt-3">← Back to Menu</a>
+</div>
+
+<!-- Code Section -->
+<div class="container">
+
+  <div class="code-box">
+<pre>
+def add(n1, n2): return n1 + n2
+def subtract(n1, n2): return n1 - n2
+def multiply(n1, n2): return n1 * n2
+def divide(n1, n2): return n1 / n2 if n2 != 0 else "Error"
+
+# User menu
+print("Select: 1.Add, 2.Subtract, 3.Multiply, 4.Divide")
+choice = input("Enter choice(1-4): ")
+
+if choice in ('1', '2', '3', '4'):
+    try:
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
         
-        <div class="pedestal" id="python">
-            <div class="floating-object-container">
-                <img src="" alt="3D Python Logo">
-            </div>
-            <h3>Seekhlo Python</h3>
-            <p>Advanced Scripts & Automation seekho simple examples ke saath.</p>
-            <a href="#" class="gold-btn">Explore Karo</a>
-        </div>
+        if choice == '1': print(f"Result: {add(num1, num2)}")
+        elif choice == '2': print(f"Result: {subtract(num1, num2)}")
+        elif choice == '3': print(f"Result: {multiply(num1, num2)}")
+        elif choice == '4': print(f"Result: {divide(num1, num2)}")
+    except ValueError:
+        print("Invalid input! Please enter numbers.")
+else:
+    print("Invalid choice")
+</pre>
+  </div>
 
-        <div class="pedestal center-piece" id="cpp">
-            <div class="floating-object-container">
-                <img src="" alt="3D C++ Logo">
-            </div>
-            <h3>C++ Core Logic</h3>
-            <p>High-Performance coding ke liye logic aur Memory management build karein.</p>
-            <a href="#" class="gold-btn">Explore Karo</a>
-        </div>
+</div>
 
-        <div class="pedestal" id="projects">
-            <div class="floating-object-container">
-                <img src="" alt="3D Arduino Board">
-            </div>
-            <h3>Kuch Banaao</h3>
-            <p>Arduino aur Python integrations ke saath kuch hatke, Real-world hardware banaao.</p>
-            <a href="#" class="gold-btn">Banaao</a>
-        </div>
-
-    </main>
+<!-- Footer -->
+<footer>
+  <p>© 2026 Parabyte</p>
+</footer>
 
 </body>
 </html>
