@@ -1,135 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Python Menu | Parabyte</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Core Logic | Parabyte</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Premium Dark Theme - C++ Edition */
+        body {
+            background-color: #090c10; /* Slightly darker than Python page for a hardcore feel */
+            color: #c9d1d9;
+            font-family: 'Inter', sans-serif;
+        }
 
-  <!-- External CSS -->
-  <link rel="stylesheet" href="style.css">
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #ffffff;
+        }
 
-  <style>
-    body {
-      background-color: #0b1f1f;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
+        /* Navbar Styling */
+        .navbar {
+            background-color: #161b22 !important;
+            border-bottom: 1px solid #30363d;
+        }
+        .navbar-brand span { color: #4da6ff; } /* C++ Accent Blue */
 
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-    }
+        /* Card Styling for Snippets */
+        .snippet-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .snippet-card:hover {
+            border-color: #4da6ff;
+            box-shadow: 0 8px 25px rgba(77, 166, 255, 0.15);
+            transform: translateY(-2px);
+        }
 
-    .menu-item {
-      background: #0b2a3a;
-      padding: 15px 20px;
-      margin: 10px 0;
-      border-radius: 12px;
-      transition: 0.3s;
-      cursor: pointer;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(0,255,255,0.2);
-    }
+        /* Code Block Styling */
+        .code-block-wrapper {
+            position: relative;
+            background-color: #010409;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 15px;
+            border: 1px solid #30363d;
+        }
+        pre {
+            margin: 0;
+            color: #79c0ff; /* C++ code text color */
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+        }
+        
+        /* Syntax highlighting mock colors */
+        .keyword { color: #ff7b72; }
+        .type { color: #ffc212; }
+        .string { color: #a5d6ff; }
+        .comment { color: #8b949e; font-style: italic; }
 
-    .menu-item:hover {
-      background: cyan;
-      color: black;
-      transform: translateX(5px);
-    }
+        /* Copy Button */
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+        .copy-btn:hover {
+            background: #4da6ff;
+            color: #090c10;
+            border-color: #4da6ff;
+        }
 
-    .menu-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #061414;
-      margin-top: 40px;
-    }
-  </style>
+        /* Sidebar styling */
+        .list-group-item {
+            background-color: transparent;
+            color: #8b949e;
+            border-color: #30363d;
+            font-weight: 500;
+        }
+        .list-group-item:hover {
+            color: #c9d1d9;
+            background-color: rgba(77, 166, 255, 0.1);
+        }
+        .list-group-item.active {
+            background-color: #1f6feb;
+            color: #ffffff;
+            border-color: #1f6feb;
+            box-shadow: 0 0 15px rgba(31, 111, 235, 0.4);
+        }
+        
+        /* Badge styling */
+        .pro-badge {
+            background: linear-gradient(135deg, #1f6feb, #4da6ff);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Para<span>byte</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="python.html">Python</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="cpp.html">C++</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gdscript.html">GDScript</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <a class="navbar-brand d-flex align-items-center" href="index.html">
-      <img src="Picsart_26-03-25_19-54-56-374.png" width="50" class="me-2">
-      Parabyte
-    </a>
+    <header class="py-5 text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">C++ Core Engine ⚙️</h1>
+            <p class="lead text-muted" style="max-width: 700px; margin: 0 auto;">High-performance logic, memory management, and advanced Data Structures & Algorithms.</p>
+        </div>
+    </header>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container mb-5">
+        <div class="row">
+            
+            <div class="col-lg-3 mb-4">
+                <div class="list-group sticky-top" style="top: 90px;">
+                    <a href="#performance" class="list-group-item list-group-item-action active">Performance & I/O</a>
+                    <a href="#memory" class="list-group-item list-group-item-action">Modern C++ (Memory)</a>
+                    <a href="#dsa" class="list-group-item list-group-item-action">Data Structures (DSA)</a>
+                </div>
+            </div>
 
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="pythonmenu.html">Python</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">C++</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">GDScript</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
-      </ul>
+            <div class="col-lg-9">
+                
+                <h3 id="performance" class="mb-4 d-flex align-items-center">Performance & Fast I/O <span class="pro-badge">Essential</span></h3>
+                
+                <div class="card snippet-card p-4">
+                    <h5 class="fw-bold text-white">1. Competitive Programming Template</h5>
+                    <p class="text-muted mb-0">The ultimate starter template for competitive coding. Disables C/C++ stream synchronization for blazing fast input/output.</p>
+                    
+                    <div class="code-block-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="bi bi-clipboard"></i> Copy</button>
+                        <pre><code><span class="keyword">#include</span> <span class="string">&lt;iostream&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;vector&gt;</span>
+
+<span class="keyword">using namespace</span> std;
+
+<span class="type">void</span> solve() {
+    <span class="comment">// Your core logic goes here</span>
+    <span class="type">int</span> n;
+    cin &gt;&gt; n;
+    cout &lt;&lt; <span class="string">"Processed: "</span> &lt;&lt; n &lt;&lt; <span class="string">"\n"</span>;
+}
+
+<span class="type">int</span> main() {
+    <span class="comment">// Fast I/O Magic Lines</span>
+    ios_base::sync_with_stdio(<span class="keyword">false</span>);
+    cin.tie(NULL);
+
+    <span class="type">int</span> t = <span class="type">1</span>;
+    <span class="comment">// cin &gt;&gt; t; // Uncomment for multiple test cases</span>
+    <span class="keyword">while</span> (t--) {
+        solve();
+    }
+    <span class="keyword">return</span> <span class="type">0</span>;
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3 id="memory" class="mb-4 mt-5 d-flex align-items-center">Modern C++ <span class="pro-badge">Pro Level</span></h3>
+                
+                <div class="card snippet-card p-4 border-primary">
+                    <h5 class="fw-bold text-white">2. Smart Pointers (No Memory Leaks)</h5>
+                    <p class="text-muted mb-0">Stop using raw pointers! Here is how to use <code>std::unique_ptr</code> for automatic memory management in modern C++.</p>
+                    
+                    <div class="code-block-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="bi bi-clipboard"></i> Copy</button>
+                        <pre><code><span class="keyword">#include</span> <span class="string">&lt;iostream&gt;</span>
+<span class="keyword">#include</span> <span class="string">&lt;memory&gt;</span>
+
+<span class="keyword">class</span> Entity {
+<span class="keyword">public</span>:
+    Entity() { std::cout &lt;&lt; <span class="string">"Created Entity!\n"</span>; }
+    ~Entity() { std::cout &lt;&lt; <span class="string">"Destroyed Entity!\n"</span>; }
+    <span class="type">void</span> print() { std::cout &lt;&lt; <span class="string">"Hello from Entity\n"</span>; }
+};
+
+<span class="type">int</span> main() {
+    {
+        <span class="comment">// Automatically destroyed when it goes out of scope</span>
+        std::unique_ptr&lt;Entity&gt; entity = std::make_unique&lt;Entity&gt;();
+        entity-&gt;print();
+    } 
+    <span class="comment">// Memory is automatically freed here. No 'delete' keyword needed!</span>
+    
+    <span class="keyword">return</span> <span class="type">0</span>;
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3 id="dsa" class="mb-4 mt-5">Data Structures (DSA)</h3>
+                
+                <div class="card snippet-card p-4">
+                    <h5 class="fw-bold text-white">3. Linked List Node Implementation</h5>
+                    <p class="text-muted mb-0">The foundational building block for advanced data structures using standard structs.</p>
+                    
+                    <div class="code-block-wrapper">
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="bi bi-clipboard"></i> Copy</button>
+                        <pre><code><span class="keyword">#include</span> <span class="string">&lt;iostream&gt;</span>
+
+<span class="comment">// Define the Node structure</span>
+<span class="keyword">struct</span> Node {
+    <span class="type">int</span> data;
+    Node* next;
+    
+    <span class="comment">// Constructor to initialize</span>
+    Node(<span class="type">int</span> val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+<span class="type">void</span> printList(Node* head) {
+    Node* temp = head;
+    <span class="keyword">while</span> (temp != nullptr) {
+        std::cout &lt;&lt; temp-&gt;data &lt;&lt; <span class="string">" -&gt; "</span>;
+        temp = temp-&gt;next;
+    }
+    std::cout &lt;&lt; <span class="string">"NULL\n"</span>;
+}
+
+<span class="comment">/* Usage:
+Node* head = new Node(10);
+head-&gt;next = new Node(20);
+printList(head);
+*/</span></code></pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<div class="hero">
-
-  <!-- BIG SITE LOGO -->
-  <img src="Picsart_26-03-25_19-54-56-374.png"
-       class="img-fluid"
-       style="max-width: 280px;">
-
-  <h1 class="mt-3">Python Menu</h1>
-  <p>Select a function or project</p>
-
-  <!-- Python Logo -->
-  <img src="1774487642667.png"
-       width="80"
-       class="mt-2"
-       style="filter: drop-shadow(0 0 10px cyan);">
-
-</div>
-
-<!-- Menu -->
-<div class="container">
-
-  <a href="calculator.html" class="menu-link">
-    <div class="menu-item">
-      Calculator
-    </div>
-  </a>
-
-  <!-- COPY THIS -->
-  <!--
-  <a href="yourpage.html" class="menu-link">
-    <div class="menu-item">
-      Your Function Name
-    </div>
-  </a>
-  -->
-
-</div>
-
-<!-- Footer -->
-<footer>
-  <p>© 2026 Parabyte</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function copyCode(button) {
+            // Find the code block
+            const preElement = button.nextElementSibling;
+            // Get text without HTML tags (removes the span tags used for syntax highlighting)
+            const codeText = preElement.innerText || preElement.textContent;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(codeText).then(() => {
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="bi bi-check2-all"></i> Copied!';
+                button.style.background = '#4da6ff';
+                button.style.color = '#090c10';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.style.background = '';
+                    button.style.color = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
