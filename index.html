@@ -3,156 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parabyte | Futuristic Portfolio</title>
+    <title>Rohit | Royal Developer Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- Base & Dark Theme --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-        body { 
-            background-color: #050812; /* Deep Dark Space Blue */
-            color: #ffffff; 
+        /* =========================================
+           1. ROYAL THEME SETUP
+           ========================================= */
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            /* Deep Royal Purple Room Lighting */
+            background: radial-gradient(circle at 50% 40%, #3a1c5e 0%, #150529 60%, #05010d 100%);
+            color: #ffffff;
+            min-height: 100vh;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(0, 243, 255, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(112, 0, 255, 0.08), transparent 25%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* --- Navigation --- */
+        /* Subtle wall texture/grid */
+        body::before {
+            content: ''; position: fixed; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: -1; pointer-events: none;
+        }
+
+        /* =========================================
+           2. PREMIUM NAVIGATION
+           ========================================= */
         nav {
-            display: flex; justify-content: center; align-items: center; gap: 100px;
-            padding: 20px 5%; margin: 20px auto; width: 90%; max-width: 1000px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px; backdrop-filter: blur(15px);
+            width: 90%; max-width: 1200px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 40px; margin-top: 20px;
+            background: rgba(20, 5, 40, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
-        .logo { font-family: 'Space Grotesk', sans-serif; font-size: 24px; color: #fff; text-decoration: none; }
-        .logo span { color: #00f3ff; text-shadow: 0 0 10px rgba(0,243,255,0.6); }
+
+        .logo {
+            font-family: 'Cinzel', serif; font-size: 24px; font-weight: 700;
+            color: #fcf6ba; letter-spacing: 2px; text-decoration: none;
+        }
+
         .nav-links { display: flex; gap: 40px; }
-        .nav-links a { color: #a0aabf; text-decoration: none; font-size: 15px; transition: color 0.3s; }
-        .nav-links a:hover { color: #fff; }
-
-        /* --- Hero Section --- */
-        .hero { text-align: center; padding: 60px 20px 40px; }
-        .hero h1 {
-            font-family: 'Space Grotesk', sans-serif; font-size: 4.5rem; letter-spacing: 2px;
-            background: linear-gradient(90deg, #ffffff, #00f3ff, #b57bff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 15px; text-shadow: 0 0 30px rgba(0,243,255,0.2);
+        .nav-links a {
+            color: #d4af37; text-decoration: none; font-size: 14px;
+            font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+            transition: color 0.3s, text-shadow 0.3s;
         }
-        .hero p { color: #a0aabf; font-size: 1.2rem; }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(212, 175, 55, 0.8); }
 
-        /* --- 3D Glassmorphism Cards --- */
-        .cards-container {
-            display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
-            padding: 40px 20px 100px;
+        /* =========================================
+           3. THE GOLDEN HEADER
+           ========================================= */
+        header { text-align: center; margin-top: 60px; margin-bottom: 50px; }
+
+        .gold-text {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem; font-weight: 800; letter-spacing: 3px; line-height: 1.2;
+            /* Premium Metallic Gold Gradient */
+            background: linear-gradient(to bottom right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text; color: transparent;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+            margin-bottom: 10px;
         }
 
-        .card {
-            background: rgba(10, 15, 30, 0.6);
-            border-radius: 24px; width: 320px; padding: 40px 30px;
+        header p { color: #c5b3d6; font-size: 1.2rem; font-weight: 300; letter-spacing: 1px; }
+
+        /* =========================================
+           4. THE 3D EXHIBIT STANDS (LAYOUT)
+           ========================================= */
+        .exhibit-hall {
+            display: flex; justify-content: center; align-items: flex-end;
+            gap: 50px; width: 100%; max-width: 1200px; padding-bottom: 80px;
+            flex-wrap: wrap;
+        }
+
+        /* Black Marble Pedestal (Stand) */
+        .pedestal {
+            background: linear-gradient(145deg, #1a1a24, #0d0d14);
+            border: 2px solid #2a2a36;
+            border-top: 4px solid #b38728; /* Gold Rim */
+            border-radius: 8px; width: 320px; padding: 30px;
             text-align: center; position: relative;
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 2px solid transparent;
-            transition: all 0.4s ease;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.8), inset 0 5px 15px rgba(255,255,255,0.05);
+            transition: transform 0.4s ease;
         }
-
-        /* Custom Glowing Borders for each card based on the image */
-        .card.python { border-color: rgba(0, 243, 255, 0.5); box-shadow: 0 0 30px rgba(0, 243, 255, 0.15), inset 0 0 20px rgba(0, 243, 255, 0.05); }
-        .card.cpp { border-color: rgba(112, 0, 255, 0.5); box-shadow: 0 0 30px rgba(112, 0, 255, 0.15), inset 0 0 20px rgba(112, 0, 255, 0.05); }
-        .card.projects { border-color: rgba(0, 243, 255, 0.4); box-shadow: 0 0 30px rgba(0, 243, 255, 0.15), inset 0 0 20px rgba(112, 0, 255, 0.05); }
-
-        .card:hover { transform: translateY(-10px); }
-        .card.python:hover { box-shadow: 0 0 40px rgba(0, 243, 255, 0.4), inset 0 0 30px rgba(0, 243, 255, 0.1); }
-        .card.cpp:hover { box-shadow: 0 0 40px rgba(112, 0, 255, 0.4), inset 0 0 30px rgba(112, 0, 255, 0.1); }
-
-        /* Card Content */
-        .card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; margin-bottom: 20px; color: #fff; }
         
-        /* 3D Image Placeholder */
-        .image-container {
-            height: 140px; display: flex; justify-content: center; align-items: center;
-            margin-bottom: 25px;
-        }
-        .image-container img {
-            max-width: 120px; max-height: 120px; object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-            animation: float 4s ease-in-out infinite;
+        /* Center Pedestal is slightly larger */
+        .pedestal.center-piece { transform: scale(1.05); z-index: 10; border-top: 4px solid #fcf6ba; }
+        .pedestal.center-piece:hover { transform: scale(1.08); }
+        .pedestal:hover { transform: translateY(-10px); }
+
+        /* =========================================
+           5. FLOATING 3D OBJECTS (MAGIC HAPPENS HERE)
+           ========================================= */
+        .floating-object-container {
+            position: absolute;
+            top: -180px; /* Stands ke upar hawa mein */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px; height: 250px;
+            display: flex; justify-content: center; align-items: flex-end;
+            pointer-events: none; /* Mouse sidha button par click ho */
         }
 
-        .card p { color: #a0aabf; font-size: 1rem; margin-bottom: 30px; line-height: 1.5; }
-
-        /* Pill Buttons */
-        .pill-btn {
-            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff; padding: 10px 25px; border-radius: 30px; font-size: 0.9rem;
-            text-decoration: none; display: inline-block; transition: all 0.3s;
+        .floating-object-container img {
+            max-width: 100%; max-height: 100%; object-fit: contain;
+            /* Smooth 3D Floating Animation */
+            animation: float3D 4s ease-in-out infinite;
+            filter: drop-shadow(0 30px 20px rgba(0,0,0,0.7));
         }
-        .card.projects .pill-btn { background: #00f3ff; color: #000; font-weight: 600; border: none; box-shadow: 0 0 15px rgba(0, 243, 255, 0.5); }
-        
-        .pill-btn:hover { background: #fff; color: #000; }
-        .card.projects .pill-btn:hover { background: #fff; box-shadow: 0 0 25px rgba(255, 255, 255, 0.8); }
 
-        /* Floating Animation for Images */
-        @keyframes float {
+        /* Delay animations so they don't bounce together */
+        .delay-1 { animation-delay: 0s !important; }
+        .delay-2 { animation-delay: 1.5s !important; }
+        .delay-3 { animation-delay: 0.7s !important; }
+
+        @keyframes float3D {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-20px); filter: drop-shadow(0 50px 25px rgba(0,0,0,0.5)); }
         }
 
-        @media (max-width: 768px) {
-            nav { gap: 20px; flex-direction: column; }
-            .hero h1 { font-size: 2.8rem; }
+        /* =========================================
+           6. STAND DETAILS & BUTTONS
+           ========================================= */
+        .pedestal h3 {
+            font-family: 'Cinzel', serif; font-size: 1.8rem; color: #fcf6ba;
+            margin-top: 60px; /* Spacing for the floating image */
+            margin-bottom: 10px;
+        }
+
+        .pedestal p { color: #a593b8; font-size: 0.95rem; margin-bottom: 25px; }
+
+        /* Royal Gold Button */
+        .gold-btn {
+            background: linear-gradient(to bottom, #fcf6ba, #b38728);
+            border: 2px solid #fff; border-radius: 30px;
+            color: #2b1055; font-size: 1rem; font-weight: 700;
+            padding: 12px 30px; cursor: pointer; text-decoration: none;
+            display: inline-block; transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.5);
+        }
+
+        .gold-btn:hover {
+            background: linear-gradient(to bottom, #fff, #fcf6ba);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .exhibit-hall { gap: 150px; padding-top: 150px; } /* Mobile mein images ke liye extra space */
+            .gold-text { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">Para<span>byte</span></a>
+        <a href="#" class="logo">♚ Parabyte</a>
         <div class="nav-links">
-            <a href="#">Python</a>
-            <a href="#">C++</a>
-            <a href="#">Projects</a>
+            <a href="#python">Python</a>
+            <a href="#cpp">C++</a>
+            <a href="#projects">Projects</a>
         </div>
     </nav>
 
-    <section class="hero">
-        <h1>CODE. BUILD. INNOVATE.</h1>
-        <p>A futuristic developer platform for ready-to-use snippets and real-world projects.</p>
-    </section>
+    <header>
+        <h1 class="gold-text">ROHIT'S PORTFOLIO<br>CODE. BUILD. INNOVATE.</h1>
+        <p>Explore optimized snippets and innovative performance.</p>
+    </header>
 
-    <section class="cards-container">
+    <main class="exhibit-hall">
         
-        <div class="card python">
-            <h2>Python</h2>
-            <div class="image-container">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="3D Python">
+        <div class="pedestal" id="python">
+            <div class="floating-object-container">
+                <img src="https://via.placeholder.com/250x250/2b1055/fcf6ba?text=Add+Snake.png+Here" alt="3D Python" class="delay-1">
             </div>
-            <p>Code Snippets + Beginner Examples</p>
-            <a href="#" class="pill-btn">Init Module</a>
+            <h3>Python</h3>
+            <p>Advanced Scripts & Automation.</p>
+            <a href="python.html" class="gold-btn">Explore Python</a>
         </div>
 
-        <div class="card cpp">
-            <h2>C++</h2>
-            <div class="image-container">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="3D C++">
+        <div class="pedestal center-piece" id="cpp">
+            <div class="floating-object-container">
+                <img src="https://via.placeholder.com/280x280/2b1055/fcf6ba?text=Add+C%2B%2B.png+Here" alt="3D C++" class="delay-2">
             </div>
-            <p>Logic-based Programs + DSA Basics</p>
-            <a href="#" class="pill-btn">Load Core</a>
+            <h3>C++ Core</h3>
+            <p>High-Performance Logic & DSA.</p>
+            <a href="cpp.html" class="gold-btn">Explore C++</a>
         </div>
 
-        <div class="card projects">
-            <h2>Projects</h2>
-            <div class="image-container">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino Board">
+        <div class="pedestal" id="projects">
+            <div class="floating-object-container">
+                <img src="https://via.placeholder.com/250x250/2b1055/fcf6ba?text=Add+Arduino.png+Here" alt="3D Arduino" class="delay-3">
             </div>
-            <p>Mini Projects<br>Real-world hardware</p>
-            <a href="#" class="pill-btn">Arduino + Python</a>
+            <h3>Projects</h3>
+            <p>Real-World Hardware + Software.</p>
+            <a href="projects.html" class="gold-btn">View Projects</a>
         </div>
 
-    </section>
+    </main>
 
 </body>
 </html>
